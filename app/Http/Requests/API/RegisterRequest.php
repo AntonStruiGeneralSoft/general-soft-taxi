@@ -4,6 +4,7 @@ namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Classes\RoleEnum;
 
 class RegisterRequest extends FormRequest
 {
@@ -31,11 +32,11 @@ class RegisterRequest extends FormRequest
             'password' => 'required|string|min:1',
             'firstName' => 'required|string|min:1|max:255',
             'lastName' => 'required|string|min:1|max:255',
-            'role' => Rule::in(['client', 'driver']),
-            //'car.make' => 'required|string|min:1',
-            //'car.model' => 'required|string|min:1',
-            //'car.year' => 'required|string|min:1',
-            //'car.color' => 'required|string|min:1',
+            'role' => ['required', Rule::in([RoleEnum::CLIENT, RoleEnum::DRIVER])],
+            'car.make' => 'nullable|string|min:1',
+            'car.model' => 'nullable|string|min:1',
+            'car.year' => 'nullable|string|min:1',
+            'car.color' => 'nullable|string|min:1',
         ];
     }
 }

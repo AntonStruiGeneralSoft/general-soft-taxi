@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 use App\Models\User;
+use App\Classes\RoleEnum;
 
 class UserFactory extends Factory
 {
@@ -20,7 +21,7 @@ class UserFactory extends Factory
         return [
             'firstName' => $this->faker->firstName(),
             'lastName' => $this->faker->firstName(),
-            'role' => $this->faker->randomElement(['client', 'driver']),
+            'role' => $this->faker->randomElement([RoleEnum::CLIENT, RoleEnum::DRIVER]),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

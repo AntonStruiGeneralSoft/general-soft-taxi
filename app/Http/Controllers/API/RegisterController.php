@@ -6,17 +6,21 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\API\RegisterRequest;
 use App\Http\Controllers\Controller;
-use Mail;
+use App\Services\API\RegisterService;
+use App\Classes\RoleEnum;
 
 class RegisterController extends Controller
 {
     public function __invoke(RegisterRequest $request) {
         $data = $request->validated();
-        Mail::send('mail', ['firstName' => $data['firstName'], 'lastName' => $data['lastName'], 'link' => ''], function ($message) {
-            $message->to($data['email'], $data['firstName'] . ' ' . $data['lastName']);
-            $message->subject('Registration');
-        });
+
+        $result = RegisterService::registerUser($data);
         
-        return response()->json();#$data, 200);
+        /*Mail::send('mail', ['firstName' => $data['firstName'], 'lastName' => $data['lastName'], 'link' => ''], function ($message) use($data){
+            $message->to($data['email'], $data['firstName'] . ' ' . $data['lastName']);
+            $message->subject('Регистрация');
+        });*/
+
+        return $data;#, 200);
     }
 }

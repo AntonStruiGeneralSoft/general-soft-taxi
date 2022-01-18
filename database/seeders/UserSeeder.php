@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+use App\Classes\RoleEnum;
 
 class UserSeeder extends Seeder
 {
@@ -20,7 +21,7 @@ class UserSeeder extends Seeder
         User::create([
             'firstName' => 'root',
             'lastName' => 'root',
-            'role' => 'admin',
+            'role' => RoleEnum::ADMIN,
             'email' => 'q2wl1bdk31@thejoker5.com',
             'email_verified_at' => now(),
             'password' => Hash::make('qwe123'), 
