@@ -35,7 +35,7 @@ class RegisterRequest extends FormRequest
             'role' => ['required', Rule::in([RoleEnum::CLIENT, RoleEnum::DRIVER])],
             'car.make' => 'nullable|string|min:1',
             'car.model' => 'nullable|string|min:1',
-            'car.year' => 'nullable|string|min:1',
+            'car.year' => 'nullable|integer|min:1980|max:' . date('Y'),
             'car.color' => 'nullable|string|min:1',
         ];
     }
