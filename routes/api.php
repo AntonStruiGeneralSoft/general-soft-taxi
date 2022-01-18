@@ -18,4 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/register', 'API\RegisterController');
+Route::group(['namespace' => 'API'], function() {
+    Route::post('/register', 'RegisterController');
+});
