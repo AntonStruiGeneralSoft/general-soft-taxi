@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'role' => RoleEnum::ADMIN,
             'email' => 'q2wl1bdk31@thejoker5.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('qwe123'), 
+            'password' => 'qwe123',
             'remember_token' => Str::random(10),
         ]);
         User::factory(100)->create();

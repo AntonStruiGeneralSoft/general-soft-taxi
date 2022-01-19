@@ -1,0 +1,43 @@
+{
+    "email": "a.struy@general-soft.by",
+    "password": "12345",
+    "firstName": "Антон",
+    "lastName": "Струй",
+    "role": "client",
+    "car": {
+        "make": "Toyota",
+        "model": "raw",
+        "year": 2015,
+        "color": "black"
+    }
+}
+
+// Проверка на уникальность email
+{
+    "email": "q2wl1bdk31@thejoker5.com",
+    "password": "12345",
+    "firstName": "Антон",
+    "lastName": "Струй",
+    "role": "driver",
+    "car": {
+        "make": "Toyota",
+        "model": "raw",
+        "year": 2015,
+        "color": "black"
+    }
+}
+
+// Данные для регистрации
+{
+    "email": "a.struy@general-soft.by",
+    "password": "12345",
+    "firstName": "Антон",
+    "lastName": "Струй",
+    "role": "driver",
+    "car": {
+        "make": "Toyota",
+        "model": "raw",
+        "year": 2015,
+        "color": "black"
+    }
+}
