@@ -2,10 +2,11 @@
 
 namespace App\Services\API;
 
+use Illuminate\Support\Str;
+
 use App\Models\User;
 use App\Models\Car;
 use App\Classes\RoleEnum;
-use Log;
 use Mail;
 
 class RegisterService
@@ -18,6 +19,7 @@ class RegisterService
                     'firstName' => $data['firstName'],
                     'lastName' => $data['lastName'],
                     'role' => RoleEnum::DRIVER,
+                    'activationLink' => Str::uuid(),
                     'email' => $data['email'],
                     'password' => $data['password']
                 ]);
@@ -26,6 +28,8 @@ class RegisterService
 
                 $user->car()->save($car);
 
+                self::sendActivationEmail($user);
+
                 return 'Driver has been successfully created';
 
             } else {
@@ -33,17 +37,24 @@ class RegisterService
             }
         }
 
-        User::create($data);
+        $data['activationLink'] = Str::uuid();
+        $user = User::create($data);
 
-        RegisterService::sendActivationEmail($data['email'], $data['firstName'], $data['lastName']);
+        self::sendActivationEmail($user);
 
         return 'User has been successfully created';
     }
 
-    static private function sendActivationEmail($email, $firstName, $lastName) {
-        Mail::send('mail', ['firstName' => $firstName, 'lastName' => $lastName, 'link' => ''], function ($message) use($email, $firstName, $lastName){
-            $message->to($email, $firstName . ' ' . $lastName);
-            $message->subject('Регистрация');
-        });
+    static private function sendActivationEmail($user) {
+        Mail::send('mail', [
+                'firstName' => $user->firstName,
+                'lastName' => $user->lastName,
+                'link' => env('APP_URL', 'http://localhost') . '/activation/' . $user -> activationLink
+            ],
+            function ($message) use($user) {
+                $message->to($user->email, $user->firstName . ' ' . $user->lastName);
+                $message->subject('Регистрация');
+            }
+        );
     }
 }
