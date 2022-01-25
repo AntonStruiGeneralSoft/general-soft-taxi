@@ -30,10 +30,10 @@ class RegisterService
 
                 self::sendActivationEmail($user);
 
-                return 'Driver has been successfully created';
+                return true;
 
             } else {
-                return 'The driver does not have the necessary fields';
+                return false;
             }
         }
 
@@ -42,7 +42,7 @@ class RegisterService
 
         self::sendActivationEmail($user);
 
-        return 'User has been successfully created';
+        return true;
     }
 
     static private function sendActivationEmail($user) {
