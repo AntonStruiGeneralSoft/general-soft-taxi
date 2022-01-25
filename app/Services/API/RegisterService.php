@@ -47,9 +47,7 @@ class RegisterService
 
     static private function sendActivationEmail($user) {
         Mail::send('mail', [
-                'firstName' => $user->firstName,
-                'lastName' => $user->lastName,
-                'link' => env('APP_URL', 'http://localhost') . '/activation/' . $user -> activationLink
+                'user' => $user
             ],
             function ($message) use($user) {
                 $message->to($user->email, $user->firstName . ' ' . $user->lastName);
