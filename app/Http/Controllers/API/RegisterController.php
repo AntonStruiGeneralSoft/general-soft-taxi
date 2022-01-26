@@ -30,7 +30,7 @@ class RegisterController extends Controller
    
         $validator = self::valid($data);
    
-        if($validator->fails()){
+        if ($validator->fails()){
             return response()->json(['success' => false], 400);   
         }
 
