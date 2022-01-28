@@ -23,6 +23,8 @@ Route::group(['namespace' => 'API'], function() {
 
     Route::post('/login', 'LoginController');
 
+    Route::post('/refresh', 'RefreshController');
+
     Route::group(['namespace' => 'User'], function() {
         Route::get('/user/me', 'CurrentUserController')->middleware('check_user');
     });
