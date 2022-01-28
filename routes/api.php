@@ -22,4 +22,8 @@ Route::group(['namespace' => 'API'], function() {
     Route::post('/register', 'RegisterController');
 
     Route::post('/login', 'LoginController');
+
+    Route::group(['namespace' => 'User'], function() {
+        Route::get('/user/me', 'CurrentUserController');
+    });
 });

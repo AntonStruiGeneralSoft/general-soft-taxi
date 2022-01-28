@@ -4,6 +4,7 @@ namespace App\Services\JWT;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+Use Exception;
 
 class TokenService implements TokenServiceInterface
 {
@@ -29,7 +30,7 @@ class TokenService implements TokenServiceInterface
 
     static public function isValid($token) {
         try {
-            return JWT::decode($token, new Key($key, env('JWT_ALGORITHM', 'HS256')));
+            return JWT::decode($token, new Key(env('JWT_SECRET', 'secret_key'), env('JWT_ALGORITHM', 'HS256')));
         } catch (Exception $e) {
             return false;
         }
