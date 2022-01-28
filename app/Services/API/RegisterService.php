@@ -3,6 +3,7 @@
 namespace App\Services\API;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 use App\Models\Car;
@@ -21,7 +22,7 @@ class RegisterService
                     'role' => RoleEnum::DRIVER,
                     'activationLink' => Str::uuid(),
                     'email' => $data['email'],
-                    'password' => $data['password']
+                    'password' => Hash::make($data['password'])
                 ]);
 
                 $car = Car::create($data['car']);
@@ -38,6 +39,8 @@ class RegisterService
         }
 
         $data['activationLink'] = Str::uuid();
+        $data['password'] = Hash::make($data['password']);
+        
         $user = User::create($data);
 
         self::sendActivationEmail($user);
