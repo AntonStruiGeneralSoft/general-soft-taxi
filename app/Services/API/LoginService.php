@@ -7,7 +7,7 @@ use App\Services\JWT\TokenService;
 
 class LoginService
 {
-    static public function login($user) {
+    static public function generateAccessAndRefreshTokens($user) {
         $data = ['id' => $user->id, 'role' => $user->role];
 
         $result = TokenService::generateToken($data); 

@@ -37,7 +37,7 @@ class LoginController extends Controller
             return response()->json(['error' => 'Wrong password'], 400);
         }
 
-        $result = LoginService::login($user);
+        $result = LoginService::generateAccessAndRefreshTokens($user);
 
         return response()->json($result, 200);
     }
