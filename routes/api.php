@@ -24,6 +24,6 @@ Route::group(['namespace' => 'API'], function() {
     Route::post('/login', 'LoginController');
 
     Route::group(['namespace' => 'User'], function() {
-        Route::get('/user/me', 'CurrentUserController');
+        Route::get('/user/me', 'CurrentUserController')->middleware('check_user');
     });
 });
